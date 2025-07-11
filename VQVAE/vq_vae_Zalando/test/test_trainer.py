@@ -25,6 +25,7 @@ from test_vq_vae import Encoder, Decoder, VectorQuantizer, VectorQuantizerEMA
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 #========================================================================================
+
 batch_size = 256
 num_training_updates = 15000
 
@@ -102,6 +103,8 @@ class Model(nn.Module):
 model = Model(num_hiddens, num_residual_layers, num_residual_hiddens,
               num_embeddings, embedding_dim, 
               commitment_cost, decay).to(device)
+
+print(model._modules)
 
 optimizer = optim.Adam(model.parameters(), lr=learning_rate, amsgrad=False)
 
